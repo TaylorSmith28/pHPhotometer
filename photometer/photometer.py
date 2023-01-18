@@ -6,9 +6,10 @@ import board
 from photometer.ui_states.main_menu import MainMenu
 from photometer.lcd import Character_LCD
 
+
 class Photometer:
     """
-    The Photometer class is the model for the state machine in order to move through the different titration states
+    The Photometer class is the model for the state machine in order to move through the different sampling states
 
     Attributes:
         state (UIState object): is used to represent the current state in the state machine
@@ -20,11 +21,7 @@ class Photometer:
         """
         The constructor for the Photometer class
         """
-        self.state = MainMenu(self)
-        self.next_state = None
-        self.temperature = None
-        self.salinity = None
-        
+
         # Initialize LCD
         self.lcd_rs = digitalio.DigitalInOut(board.GP2)
         self.lcd_en = digitalio.DigitalInOut(board.GP3)
@@ -36,10 +33,24 @@ class Photometer:
         self.lcd_columns = 16
         self.lcd_rows = 2
 
-        self.lcd = Character_LCD(self.lcd_rs, self.lcd_en, self.lcd_d4, self.lcd_d5, self.lcd_d6,
-        self.lcd_d7, self.lcd_columns,self.lcd_rows)
+        self.lcd = Character_LCD(
+            self.lcd_rs,
+            self.lcd_en,
+            self.lcd_d4,
+            self.lcd_d5,
+            self.lcd_d6,
+            self.lcd_d7,
+            self.lcd_columns,
+            self.lcd_rows,
+        )
 
         # Initialize Keypad
+
+        # Initialize State
+        self.state = MainMenu(self)
+        self.next_state = None
+        self.temperature = None
+        self.salinity = None
 
     def loop(self):
         """
@@ -68,7 +79,7 @@ class Photometer:
         """
         The function used to receive the keypad input and process the appropriate response
         """
-        key = self.keypad.get_key()
-        self.state.handle_key(key)
+        #key = self.keypad.get_key() Needs implementing
+        #self.state.handle_key(key) Needs implementing
         self._update_state()
         self.state.loop()

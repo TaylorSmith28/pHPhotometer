@@ -2,7 +2,7 @@
 The file for the Salinity class
 """
 from photometer.ui_states.ui_state import UIState
-from photometer.lcd import Character_LCD
+
 
 class Salinity(UIState):
     def __init__(self, photometer, previous_state=None):
@@ -22,12 +22,9 @@ class Salinity(UIState):
             self.string = ""
         elif key == "*":
             if "." not in self.string:
-                self.string = self.string +"."
+                self.string = self.string + "."
         elif key.isnumeric():
-            self.string = self.string +str(key)
+            self.string = self.string + str(key)
 
     def loop(self):
-        self.photometer.lcd.message("*=. B=BS C=Clr", line=1)
-        self.photometer.lcd.message(self.string, line=2)
-
-    
+        self.photometer.lcd.message = "*=. B=BS C=Clr\n" + self.string
