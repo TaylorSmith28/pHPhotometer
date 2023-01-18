@@ -21,7 +21,7 @@ class MainMenu(UIState):
         """
         The function to loop through until a keypad press
         """
-        Character_LCD.message("1. Settings", 1)
-        Character_LCD.message("2. ReadValues", 2)
+        self.photometer.lcd.message("1. Settings", 1)
+        self.photometer.lcd.message("2. ReadValues", 2)
 
 
