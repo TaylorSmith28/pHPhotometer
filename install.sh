@@ -1,3 +1,1 @@
-
-
 cp ./* D:/ -Recurse -Force
