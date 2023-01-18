@@ -27,7 +27,7 @@ class Salinity(UIState):
             self.string = self.string +str(key)
 
     def loop(self):
-        Character_LCD.message("*=. B=BS C=Clr", line=1)
-        Character_LCD.message(self.string, line=2)
+        self.photometer.lcd.message("*=. B=BS C=Clr", line=1)
+        self.photometer.lcd.message(self.string, line=2)
 
     

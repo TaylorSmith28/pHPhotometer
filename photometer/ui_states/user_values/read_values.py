@@ -8,5 +8,5 @@ class ReadValues(UIState):
     def handle_key(self, key):
         self._set_next_state(self.previous_state)
     def loop(self):
-        Character_LCD.message("Sal: "+self.photometer.salinity, 1)
-        Character_LCD.message("Temp: "+self.photometer.salinity,2)
+        self.photometer.lcd.message("Sal: "+self.photometer.salinity, 1)
+        self.photometer.lcd.message("Temp: "+self.photometer.salinity,2)

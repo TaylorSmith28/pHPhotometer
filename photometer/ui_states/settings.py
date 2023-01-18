@@ -13,5 +13,5 @@ class Settings(UIState):
         elif key == 2:
             self._set_next_state(Temperature(self.photometer))
     def loop(self):
-        Character_LCD.message("1. Salinity", 1)
-        Character_LCD.message("2. Temperature", 2)
+        self.photometer.lcd.message("1. Salinity", 1)
+        self.photometer.lcd.message("2. Temperature", 2)
