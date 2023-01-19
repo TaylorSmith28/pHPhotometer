@@ -56,6 +56,8 @@ class Photometer:
         """
         The function used to loop through in each state
         """
+        #self.lcd.clear()
+        #self.lcd.message = "loop"
         self._handle_ui()
 
     def set_next_state(self, new_state, update):
