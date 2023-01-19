@@ -1,10 +1,20 @@
 """
 The file for the Photometer class
 """
-import digitalio
-import board
 from photometer.ui_states.main_menu import MainMenu
-from photometer.lcd import Character_LCD
+from photometer import constants
+
+# Which imports to use for testing
+if constants.IS_TEST:
+    from photometer.devices import board_mock
+    from photometer.devices.lcd_mock import Character_LCD
+
+    board_class = board_mock
+else:
+    import board
+    from photometer.devices.lcd import Character_LCD
+
+    board_class = board
 
 
 class Photometer:
@@ -23,23 +33,16 @@ class Photometer:
         """
 
         # Initialize LCD
-        self.lcd_rs = digitalio.DigitalInOut(board.GP2)
-        self.lcd_en = digitalio.DigitalInOut(board.GP3)
-        self.lcd_d7 = digitalio.DigitalInOut(board.GP19)
-        self.lcd_d6 = digitalio.DigitalInOut(board.GP18)
-        self.lcd_d5 = digitalio.DigitalInOut(board.GP17)
-        self.lcd_d4 = digitalio.DigitalInOut(board.GP16)
-
         self.lcd_columns = 16
         self.lcd_rows = 2
 
         self.lcd = Character_LCD(
-            self.lcd_rs,
-            self.lcd_en,
-            self.lcd_d4,
-            self.lcd_d5,
-            self.lcd_d6,
-            self.lcd_d7,
+            board_class.GP2,
+            board_class.GP3,
+            board_class.GP19,
+            board_class.GP18,
+            board_class.GP17,
+            board_class.GP16,
             self.lcd_columns,
             self.lcd_rows,
         )
@@ -56,8 +59,8 @@ class Photometer:
         """
         The function used to loop through in each state
         """
-        #self.lcd.clear()
-        #self.lcd.message = "loop"
+        # self.lcd.clear()
+        # self.lcd.message = "loop"
         self._handle_ui()
 
     def set_next_state(self, new_state, update):
@@ -81,7 +84,7 @@ class Photometer:
         """
         The function used to receive the keypad input and process the appropriate response
         """
-        #key = self.keypad.get_key() Needs implementing
-        #self.state.handle_key(key) Needs implementing
+        # key = self.keypad.get_key() Needs implementing
+        # self.state.handle_key(key) Needs implementing
         self._update_state()
         self.state.loop()
