@@ -61,7 +61,7 @@ class UIState:
         """
         pass
 
-    def _set_next_state(self, state, update):
+    def _set_next_state(self, state, update=True):
         """
         The function to set the next state to go to
 

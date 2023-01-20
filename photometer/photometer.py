@@ -63,7 +63,7 @@ class Photometer:
         # self.lcd.message = "loop"
         self._handle_ui()
 
-    def set_next_state(self, new_state, update):
+    def set_next_state(self, new_state, update=True):
         """
         The function used to set the next state the state machine will enter
         """

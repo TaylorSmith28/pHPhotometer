@@ -49,7 +49,7 @@ class Temperature(UIState):
             key (char): the keypad input to determine which state to go to
         """
         if key == "A":
-            self.save_value(self.string)
+            self.save_value()
             self._set_next_state(self.previous_state)
         elif key == "B":
             self.string = self.string[:-1]
