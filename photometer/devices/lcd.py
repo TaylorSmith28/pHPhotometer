@@ -28,25 +28,25 @@ _LCD_ROW_OFFSETS = (0x00, 0x40, 0x14, 0x54)
 class Character_LCD:
     def __init__(
         self,
-        rs: digitalio.DigitalInOut,
-        en: digitalio.DigitalInOut,
-        d4: digitalio.DigitalInOut,
-        d5: digitalio.DigitalInOut,
-        d6: digitalio.DigitalInOut,
-        d7: digitalio.DigitalInOut,
-        columns: int,
-        lines: int,
+        rs,
+        en,
+        d4,
+        d5,
+        d6,
+        d7,
+        columns,
+        lines,
     ):
+
+        self.reset = digitalio.DigitalInOut(rs)
+        self.enable = digitalio.DigitalInOut(en)
+        self.dl7 = digitalio.DigitalInOut(d7)
+        self.dl6 = digitalio.DigitalInOut(d6)
+        self.dl5 = digitalio.DigitalInOut(d5)
+        self.dl4 = digitalio.DigitalInOut(d4)
 
         self.columns = columns
         self.lines = lines
-
-        self.reset = rs
-        self.enable = en
-        self.dl4 = d4
-        self.dl5 = d5
-        self.dl6 = d6
-        self.dl7 = d7
 
         for pin in (rs, en, d4, d5, d6, d7):
             pin.direction = digitalio.Direction.OUTPUT

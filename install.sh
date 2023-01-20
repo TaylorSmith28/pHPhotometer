@@ -1,1 +1,0 @@
-cp ./* D:/ -Recurse -Force

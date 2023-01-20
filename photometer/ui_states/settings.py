@@ -15,6 +15,7 @@ class Settings(UIState):
         previous_state (UIState object): the previous_state is used to return the last visited state
         substate (int): the substate is used to keep track of substate of the UIState
     """
+
     def handle_key(self, key):
         """
         The function to respond to a keypad input:
