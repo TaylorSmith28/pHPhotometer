@@ -15,6 +15,7 @@ class Salinity(UIState):
         message (string): the message is used to display what setting you are entering
         string (string): the string is used to hold the user input
     """
+
     def __init__(self, photometer, previous_state=None):
         """
         The constructor for the Salinity state

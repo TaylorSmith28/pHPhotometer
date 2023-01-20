@@ -12,7 +12,7 @@ if constants.IS_TEST:
     board_class = board_mock
 else:
     import board
-    from photometer.devices.lcd import Character_LCD
+    from photometer.devices.lcd import Character_LCD  # type: ignore
 
     board_class = board
 
