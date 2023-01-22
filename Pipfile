@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pip = "*"
 flake8 = "*"
 isort = "*"
 pycodestyle = "*"
@@ -15,7 +16,3 @@ adafruit-circuitpython-lis3dh = "*"
 
 [requires]
 python_version = "3.11.1"
-
-[packages]
-pip = "*"
-adafruit-circuitpython-lis3dh = "*"

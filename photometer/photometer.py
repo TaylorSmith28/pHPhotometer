@@ -6,15 +6,13 @@ from photometer import constants
 
 # Which imports to use for testing
 if constants.IS_TEST:
-    from photometer.devices import board_mock
+    from photometer.devices import board_mock as board_class
     from photometer.devices.lcd_mock import Character_LCD
-
-    board_class = board_mock
+    from photometer.devices.keypad_mock import Keypad
 else:
-    import board
+    import board as board_class
     from photometer.devices.lcd import Character_LCD  # type: ignore
-
-    board_class = board
+    from photometer.devices.keypad import Keypad # type: ignore
 
 
 class Photometer:
@@ -37,17 +35,28 @@ class Photometer:
         self.lcd_rows = 2
 
         self.lcd = Character_LCD(
-            board_class.GP2,
-            board_class.GP3,
-            board_class.GP19,
-            board_class.GP18,
-            board_class.GP17,
-            board_class.GP16,
-            self.lcd_columns,
-            self.lcd_rows,
+            rs=board_class.GP2,
+            en=board_class.GP3,
+            d4=board_class.GP16,
+            d5=board_class.GP17,
+            d6=board_class.GP18,
+            d7=board_class.GP19,
+            columns=self.lcd_columns,
+            lines=self.lcd_rows,
         )
 
         # Initialize Keypad
+        self.key = "A"
+        self.keypad = Keypad(
+            r0=board_class.GP6,
+            r1=board_class.GP7,
+            r2=board_class.GP8,
+            r3=board_class.GP9,
+            c0=board_class.GP10,
+            c1=board_class.GP11,
+            c2=board_class.GP12,
+            c3=board_class.GP13,
+        )
 
         # Initialize State
         self.state = MainMenu(self)
@@ -59,8 +68,6 @@ class Photometer:
         """
         The function used to loop through in each state
         """
-        # self.lcd.clear()
-        # self.lcd.message = "loop"
         self._handle_ui()
 
     def set_next_state(self, new_state, update=True):
@@ -84,7 +91,10 @@ class Photometer:
         """
         The function used to receive the keypad input and process the appropriate response
         """
-        # key = self.keypad.get_key() Needs implementing
-        # self.state.handle_key(key) Needs implementing
-        self._update_state()
-        self.state.loop()
+        # This is implemented this way to prevent button bouncing
+        # This should eventually be moved to its own function
+        if self.key != self.keypad.keypad_poll():
+            self.key = self.keypad.keypad_poll()
+            self.state.handle_key(self.key)
+            self._update_state()
+            self.state.loop()
