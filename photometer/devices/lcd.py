@@ -1,6 +1,5 @@
 import time
 import digitalio
-import board
 
 _LCD_CLEARDISPLAY = 0x01
 _LCD_RETURNHOME = 0x02

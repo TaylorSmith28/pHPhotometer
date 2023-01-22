@@ -10,9 +10,9 @@ if constants.IS_TEST:
     from photometer.devices.lcd_mock import Character_LCD
     from photometer.devices.keypad_mock import Keypad
 else:
-    import board as board_class
+    import board as board_class  # type: ignore
     from photometer.devices.lcd import Character_LCD  # type: ignore
-    from photometer.devices.keypad import Keypad # type: ignore
+    from photometer.devices.keypad import Keypad  # type: ignore
 
 
 class Photometer:
@@ -94,7 +94,7 @@ class Photometer:
         # This is implemented this way to prevent button bouncing
         # This should eventually be moved to its own function
         if self.key != self.keypad.keypad_poll():
-            self.key = self.keypad.keypad_poll()
+            self.key = self.keypad.keypad_poll()  # pylint: disable = E1128
             self.state.handle_key(self.key)
             self._update_state()
             self.state.loop()
