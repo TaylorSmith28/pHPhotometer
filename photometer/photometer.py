@@ -52,8 +52,8 @@ class Photometer:
         # Initialize State
         self.state = MainMenu(self)
         self.next_state = None
-        self.temperature = None
-        self.salinity = None
+        self.temperature = "0"
+        self.salinity = "0"
 
     def loop(self):
         """

@@ -16,7 +16,7 @@ class Temperature(UIState):
         string (string): the string is used to hold the user input
     """
 
-    def __init__(self, photometer, previous_state=None):
+    def __init__(self, photometer, previous_state):
         """
         The constructor for the Temperature state
 

@@ -10,52 +10,15 @@ class Character_LCD:
         columns,
         lines,
     ):
-
-        pass
-
-    def home(self):
         pass
 
     def clear(self):
         pass
 
     @property
-    def cursor(self):
-        pass
-
-    @cursor.setter
-    def cursor(self, show: bool):
-        pass
-
-    def cursor_position(self, column: int, row: int):
-        pass
-
-    @property
-    def blink(self):
-        pass
-
-    @blink.setter
-    def blink(self, blink: bool):
-        pass
-
-    @property
-    def display(self):
-        pass
-
-    @display.setter
-    def display(self, enable: bool):
-        pass
-
-    @property
     def message(self):
-        pass
+        return self._message
 
     @message.setter
     def message(self, message: str):
-        pass
-
-    def _write8(self, value: int, char_mode: bool = False):
-        pass
-
-    def _pulse_enable(self):
-        pass
+        self._message = message
