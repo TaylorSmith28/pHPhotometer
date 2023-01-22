@@ -40,7 +40,8 @@ def test_handle_key(set_next_state_mock):
     assert temperature.string == "."
 
     temperature.handle_key("3")
-    assert temperature.string ==".3"
+    assert temperature.string == ".3"
+
 
 def test_loop():
     """
@@ -69,7 +70,6 @@ def test_temperature(set_next_state_mock):
 
     temperature.loop()
     assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
-    
 
     temperature.handle_key("3")
     assert temperature.string == "3"

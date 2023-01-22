@@ -40,7 +40,8 @@ def test_handle_key(set_next_state_mock):
     assert salinity.string == "."
 
     salinity.handle_key("3")
-    assert salinity.string ==".3"
+    assert salinity.string == ".3"
+
 
 def test_loop():
     """
@@ -69,7 +70,6 @@ def test_salinity(set_next_state_mock):
 
     salinity.loop()
     assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
-    
 
     salinity.handle_key("3")
     assert salinity.string == "3"
