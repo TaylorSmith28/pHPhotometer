@@ -4,20 +4,20 @@ We're thrilled that you'd like to contribute to this project.
 Your help is essential for making it great.
 
 ## Submitting a pull request
-[Pull Requests][pulls] are used for adding new code and documents to the repository, or editing the existing code or documentation.
+Pull Requests are used for adding new code and documents to the repository, or editing the existing code or documentation.
 
 **With write access**
 1. Clone the repository (only if you have write access)
 1. Create a new branch: `git checkout -b my-branch-name`
 1. Make your change
-1. Push and [submit a pull request][pr]
+1. Push and submit a pull request
 1. Pat yourself on the back and wait for your pull request to be reviewed and merged.
 
 **Without write access**
-1. [Fork][fork] and clone the repository
+1. Fork and clone the repository
 1. Create a new branch: `git checkout -b my-branch-name`
 1. Make your change
-1. Push to your fork and [submit a pull request][pr]
+1. Push to your fork and submit a pull request
 1. Pat your self on the back and wait for your pull request to be reviewed and merged.
 
 Here are a few things you can do that will increase the likelihood of your pull request being accepted:
