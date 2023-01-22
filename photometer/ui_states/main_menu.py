@@ -3,6 +3,7 @@ The file for the MainMenu class
 """
 from photometer.ui_states.ui_state import UIState
 from photometer.ui_states.settings import Settings
+from photometer.ui_states.user_values.read_values import ReadValues
 
 # from photometer.ui_states.settings import Sample
 # from photometer.ui_states.user_values.read_values import ReadValues
@@ -29,9 +30,8 @@ class MainMenu(UIState):
         """
         if key == "1":
             self._set_next_state(Settings(self.photometer))
-        # NEEDS IMPLEMENTING
-        # elif key == "2":
-        #    self._set_next_state(ReadValues(self.photometer))
+        elif key == "2":
+            self._set_next_state(ReadValues(self.photometer))
         # elif key == "3":
         #    self._set_next_state(Sample(self.photometer))
 

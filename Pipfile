@@ -11,6 +11,11 @@ pytest = "*"
 pylint = "*"
 pytest-cov = "*"
 pytest-mock = "*"
+adafruit-circuitpython-lis3dh = "*"
 
 [requires]
 python_version = "3.11.1"
+
+[packages]
+pip = "*"
+adafruit-circuitpython-lis3dh = "*"

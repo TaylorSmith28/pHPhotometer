@@ -25,10 +25,10 @@ class Settings(UIState):
         Parameters:
             key (char): the keypad input to determine which state to go to
         """
-        if key == 1:
-            self._set_next_state(Salinity(self.photometer))
-        elif key == 2:
-            self._set_next_state(Temperature(self.photometer))
+        if key == "1":
+            self._set_next_state(Salinity(self.photometer, self))
+        elif key == "2":
+            self._set_next_state(Temperature(self.photometer, self))
 
     def loop(self):
         """
