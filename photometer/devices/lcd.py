@@ -48,7 +48,7 @@ class Character_LCD:
         self.columns = columns
         self.lines = lines
 
-        for pin in (rs, en, d4, d5, d6, d7):
+        for pin in (self.reset, self.enable, self.dl4, self.dl5, self.dl6, self.dl7):
             pin.direction = digitalio.Direction.OUTPUT
 
         self._write8(0x33)
