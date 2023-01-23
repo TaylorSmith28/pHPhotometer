@@ -7,23 +7,21 @@ from photometer.ui_states.ui_state import UIState
 
 class UserValue(UIState):
     """
-    This is a superclass for the uservalue state's temperature and salinity
+    This is a superclass for the UserValue state's temperature and salinity
 
     Attributes:
         photometer (Photometer object): the photometer is used to move through the state machine
         previous_state (UIState object): the previous_state is used to return the last visited state
         substate (int): the substate is used to keep track of substate of the UIState
-        string (string): the string is used to hold the user input
     """
 
     def __init__(self, photometer, previous_state):
         """
-        The constructor for the Temperature state
+        The constructor for the UserValue state
 
         Parameters:
             photometer (Photometer object): the photometer is used to move through the state machine
             previous_state (UIState object): the previous_state is used to return the last visited state
-            message (string): the message is used to display what setting you are entering
         """
         super().__init__(photometer, previous_state)
         self.string = ""
@@ -32,9 +30,9 @@ class UserValue(UIState):
         """
         The function to save photometer values
 
-        THIS MUST BE IMPLEMENTED FOR EACH USERVALUE STATE
+        This must be implemented for each user_value state
         """
-        raise Exception(self.name() + " reguires a save_value function")
+        raise Exception(self.name() + " requires a save_value function")
 
     def handle_key(self, key):
         """

@@ -22,7 +22,7 @@ class ReadValues(UIState):
         Parameters:
             key (char): the keypad input to determine which state to go to
         """
-        if key != None:
+        if key is not None:
             self._set_next_state(self.previous_state)
 
     def loop(self):
