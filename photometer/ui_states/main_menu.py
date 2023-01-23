@@ -29,9 +29,9 @@ class MainMenu(UIState):
             key (char): the keypad input to determine which state to go to
         """
         if key == "1":
-            self._set_next_state(Settings(self.photometer))
+            self._set_next_state(Settings(self.photometer, self))
         elif key == "2":
-            self._set_next_state(ReadValues(self.photometer))
+            self._set_next_state(ReadValues(self.photometer, self))
         # elif key == "3":
         #    self._set_next_state(Sample(self.photometer))
 

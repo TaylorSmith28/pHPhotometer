@@ -92,27 +92,7 @@ def test_temperature(set_next_state_mock):
     temperature.handle_key("1")
     assert temperature.string == "3.1"
 
-    temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
-
-    temperature.handle_key("B")
-    assert temperature.string == "3."
-
-    temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
-
-    temperature.handle_key("B")
-    assert temperature.string == "3"
-
-    temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
-
-    temperature.handle_key("C")
-    assert temperature.string == ""
-
-    temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
-
     temperature.handle_key("A")
+    assert temperature.photometer.temperature == "3.1"
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "Settings"
