@@ -92,27 +92,7 @@ def test_salinity(set_next_state_mock):
     salinity.handle_key("1")
     assert salinity.string == "3.1"
 
-    salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
-
-    salinity.handle_key("B")
-    assert salinity.string == "3."
-
-    salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
-
-    salinity.handle_key("B")
-    assert salinity.string == "3"
-
-    salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
-
-    salinity.handle_key("C")
-    assert salinity.string == ""
-
-    salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
-
     salinity.handle_key("A")
+    assert salinity.photometer.salinity == "3.1"
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "Settings"

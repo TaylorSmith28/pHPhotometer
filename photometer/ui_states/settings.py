@@ -29,6 +29,8 @@ class Settings(UIState):
             self._set_next_state(Salinity(self.photometer, self))
         elif key == "2":
             self._set_next_state(Temperature(self.photometer, self))
+        elif key == "D":
+            self._set_next_state(self.previous_state)
 
     def loop(self):
         """
