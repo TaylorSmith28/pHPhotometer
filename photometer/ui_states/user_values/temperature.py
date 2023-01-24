@@ -20,3 +20,4 @@ class Temperature(UserValue):
         The function to save the temperature
         """
         self.photometer.temperature = self.string
+    
