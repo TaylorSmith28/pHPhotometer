@@ -4,7 +4,6 @@ The file to test the Settings class
 from unittest.mock import ANY
 from unittest import mock
 from photometer.ui_states.settings import Settings
-from photometer.ui_states.settings import Settings
 from photometer.photometer import Photometer
 
 

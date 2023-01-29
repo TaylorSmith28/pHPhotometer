@@ -50,7 +50,9 @@ def test_loop():
     correction1 = Correction1(Photometer(), Settings(Photometer()))
 
     correction1.loop()
-    assert correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    assert (
+        correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    )
 
 
 @mock.patch.object(Correction1, "_set_next_state")
@@ -69,25 +71,33 @@ def test_correction1(set_next_state_mock):
     correction1 = Correction1(Photometer(), Settings(Photometer()))
 
     correction1.loop()
-    assert correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    assert (
+        correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    )
 
     correction1.handle_key("3")
     assert correction1.string == "3"
 
     correction1.loop()
-    assert correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    assert (
+        correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    )
 
     correction1.handle_key("*")
     assert correction1.string == "3."
 
     correction1.loop()
-    assert correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    assert (
+        correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    )
 
     correction1.handle_key("*")
     assert correction1.string == "3."
 
     correction1.loop()
-    assert correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    assert (
+        correction1.photometer.lcd.message == "corr=c1*abs+c2\nc1:" + correction1.string
+    )
 
     correction1.handle_key("1")
     assert correction1.string == "3.1"

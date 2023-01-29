@@ -79,7 +79,7 @@ def test_read_values(set_next_state_mock):
     read_values.loop()
     assert read_values.photometer.lcd.message == "C1: " + \
         read_values.photometer.c1 + "\nC2: "+read_values.photometer.c2
-    
+
     read_values.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "MainMenu"

@@ -46,5 +46,6 @@ class ReadValues(UIState):
                 + self.photometer.temperature
             )
         elif self.substate == 2:
-            self.photometer.lcd.message = "C1: " + \
-                self.photometer.c1 + "\nC2: "+self.photometer.c2
+            self.photometer.lcd.message = (
+                "C1: " + self.photometer.c1 + "\nC2: " + self.photometer.c2
+            )
