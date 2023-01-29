@@ -20,3 +20,10 @@ class Temperature(UserValue):
         The function to save the temperature
         """
         self.photometer.temperature = self.string
+
+    def loop(self):
+        """
+        The function to loop through until a keypad press
+        """
+        self.photometer.lcd.clear()
+        self.photometer.lcd.message = "Temperature (C)\n" + self.string
