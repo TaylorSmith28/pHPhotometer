@@ -49,8 +49,10 @@ def test_loop():
 
     read_values.substate = 2
     read_values.loop()
-    assert read_values.photometer.lcd.message == "C1: " + \
-        read_values.photometer.c1 + "\nC2: "+read_values.photometer.c2
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
 
 
 @mock.patch.object(ReadValues, "_set_next_state")
@@ -77,8 +79,10 @@ def test_read_values(set_next_state_mock):
     assert read_values.substate == 2
 
     read_values.loop()
-    assert read_values.photometer.lcd.message == "C1: " + \
-        read_values.photometer.c1 + "\nC2: "+read_values.photometer.c2
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
 
     read_values.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
@@ -93,8 +97,10 @@ def test_read_values(set_next_state_mock):
 
     read_values.substate = 2
     read_values.loop()
-    assert read_values.photometer.lcd.message == "C1: " + \
-        read_values.photometer.c1 + "\nC2: "+read_values.photometer.c2
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
 
     read_values.handle_key("D")
     set_next_state_mock.assert_called_with(ANY)
