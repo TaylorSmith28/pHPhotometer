@@ -1,12 +1,14 @@
 """
-The file for the ReadValues class
+The file for the Results class
 """
+
 from photometer.ui_states.ui_state import UIState
+from photometer.ui_states import main_menu
 
 
-class ReadValues(UIState):
+class Results(UIState):
     """
-    This is a class for the ReadValues state of the photometer
+    This is a class for the Results state of the photometer
 
     Attributes:
         photometer (Photometer object): the photometer is used to move through the state machine
@@ -22,16 +24,8 @@ class ReadValues(UIState):
         Parameters:
             key (char): the keypad input to determine which state to go to
         """
-        if key == "A":
-            self._set_next_state(self.previous_state)
-        elif key == "B":
-            if self.substate == 2:
-                self.substate = 1
-        elif key == "C":
-            if self.substate == 1:
-                self.substate = 2
-        elif key == "D":
-            self._set_next_state(self.previous_state)
+        if key is not None:
+            self._set_next_state(main_menu.MainMenu(self.photometer))
 
     def loop(self):
         """
@@ -40,12 +34,12 @@ class ReadValues(UIState):
         self.photometer.lcd.clear()
         if self.substate == 1:
             self.photometer.lcd.message = (
-                "Sal: "
-                + self.photometer.salinity
-                + "\nTemp: "
-                + self.photometer.temperature
-            )
-        elif self.substate == 2:
-            self.photometer.lcd.message = (
-                "C1: " + self.photometer.c1 + "\nC2: " + self.photometer.c2
+                "R"
+                + self.photometer.r2
+                + "G"
+                + self.photometer.g2
+                + "B"
+                + self.photometer.b2
+                + "\npH: "
+                + self.photometer.ph
             )

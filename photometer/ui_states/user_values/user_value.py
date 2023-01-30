@@ -67,5 +67,4 @@ class UserValue(UIState):
         """
         The function to loop through until a keypad press
         """
-        self.photometer.lcd.clear()
-        self.photometer.lcd.message = "*=. B=BS C=Clr\n" + self.string
+        raise Exception(self.name() + " requires a loop function")

@@ -63,6 +63,15 @@ class Photometer:
         self.next_state = None
         self.temperature = "0"
         self.salinity = "0"
+        self.c1 = "0"
+        self.c2 = "0"
+        self.r1 = "0"
+        self.r2 = "0"
+        self.g1 = "0"
+        self.g2 = "0"
+        self.b1 = "0"
+        self.b2 = "0"
+        self.ph = "0"
 
     def loop(self):
         """

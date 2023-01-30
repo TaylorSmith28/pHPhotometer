@@ -50,7 +50,9 @@ def test_loop():
     temperature = Temperature(Photometer(), Settings(Photometer()))
 
     temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
+    assert (
+        temperature.photometer.lcd.message == "Temperature (C)\n" + temperature.string
+    )
 
 
 @mock.patch.object(Temperature, "_set_next_state")
@@ -69,25 +71,33 @@ def test_temperature(set_next_state_mock):
     temperature = Temperature(Photometer(), Settings(Photometer()))
 
     temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
+    assert (
+        temperature.photometer.lcd.message == "Temperature (C)\n" + temperature.string
+    )
 
     temperature.handle_key("3")
     assert temperature.string == "3"
 
     temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
+    assert (
+        temperature.photometer.lcd.message == "Temperature (C)\n" + temperature.string
+    )
 
     temperature.handle_key("*")
     assert temperature.string == "3."
 
     temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
+    assert (
+        temperature.photometer.lcd.message == "Temperature (C)\n" + temperature.string
+    )
 
     temperature.handle_key("*")
     assert temperature.string == "3."
 
     temperature.loop()
-    assert temperature.photometer.lcd.message == "*=. B=BS C=Clr\n" + temperature.string
+    assert (
+        temperature.photometer.lcd.message == "Temperature (C)\n" + temperature.string
+    )
 
     temperature.handle_key("1")
     assert temperature.string == "3.1"

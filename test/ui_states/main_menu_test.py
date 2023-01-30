@@ -14,13 +14,27 @@ def test_handle_key(set_next_state_mock):
     """
     main_menu = MainMenu(Photometer())
 
-    main_menu.handle_key("1")
+    main_menu.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "AddSample"
+
+    main_menu.substate = 2
+    main_menu.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "Settings"
 
-    main_menu.handle_key("2")
+    main_menu.substate = 3
+    main_menu.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "ReadValues"
+
+    main_menu.substate = 3
+    main_menu.handle_key("B")
+    assert main_menu.substate == 2
+
+    main_menu.substate = 1
+    main_menu.handle_key("C")
+    assert main_menu.substate == 2
 
 
 def test_loop():
@@ -30,7 +44,15 @@ def test_loop():
     main_menu = MainMenu(Photometer())
 
     main_menu.loop()
-    assert main_menu.photometer.lcd.message == "1. Settings\n2. ReadValues"
+    assert main_menu.photometer.lcd.message == " Main Menu\n>Sample"
+
+    main_menu.substate = 2
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == ">Settings\n Read Values"
+
+    main_menu.substate = 3
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == " Settings\n>Read Values"
 
 
 @mock.patch.object(MainMenu, "_set_next_state")
@@ -41,12 +63,54 @@ def test_main_menu(set_next_state_mock):
     main_menu = MainMenu(Photometer())
 
     main_menu.loop()
-    assert main_menu.photometer.lcd.message == "1. Settings\n2. ReadValues"
+    assert main_menu.photometer.lcd.message == " Main Menu\n>Sample"
 
-    main_menu.handle_key("1")
+    main_menu.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "AddSample"
+
+    main_menu.handle_key("C")
+    assert main_menu.substate == 2
+
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == ">Settings\n Read Values"
+
+    main_menu.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "Settings"
 
-    main_menu.handle_key("2")
+    main_menu.handle_key("C")
+    assert main_menu.substate == 3
+
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == " Settings\n>Read Values"
+
+    main_menu.handle_key("A")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "ReadValues"
+
+    main_menu.handle_key("C")
+    assert main_menu.substate == 3
+
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == " Settings\n>Read Values"
+
+    main_menu.handle_key("B")
+    assert main_menu.substate == 2
+
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == ">Settings\n Read Values"
+
+    main_menu.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "Settings"
+
+    main_menu.handle_key("B")
+    assert main_menu.substate == 1
+
+    main_menu.loop()
+    assert main_menu.photometer.lcd.message == " Main Menu\n>Sample"
+
+    main_menu.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "AddSample"

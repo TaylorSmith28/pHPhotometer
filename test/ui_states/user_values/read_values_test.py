@@ -15,7 +15,19 @@ def test_handle_key(set_next_state_mock):
     """
     read_values = ReadValues(Photometer(), MainMenu(Photometer()))
 
-    read_values.handle_key("1")
+    read_values.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "MainMenu"
+
+    read_values.substate = 2
+    read_values.handle_key("B")
+    assert read_values.substate == 1
+
+    read_values.substate = 1
+    read_values.handle_key("C")
+    assert read_values.substate == 2
+
+    read_values.handle_key("D")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "MainMenu"
 
@@ -35,6 +47,13 @@ def test_loop():
         + read_values.photometer.salinity
     )
 
+    read_values.substate = 2
+    read_values.loop()
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
+
 
 @mock.patch.object(ReadValues, "_set_next_state")
 def test_read_values(set_next_state_mock):
@@ -52,6 +71,37 @@ def test_read_values(set_next_state_mock):
         + read_values.photometer.salinity
     )
 
-    read_values.handle_key("1")
+    read_values.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "MainMenu"
+
+    read_values.handle_key("C")
+    assert read_values.substate == 2
+
+    read_values.loop()
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
+
+    read_values.handle_key("A")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "MainMenu"
+
+    read_values.handle_key("D")
+    set_next_state_mock.assert_called_with(ANY)
+    assert set_next_state_mock.call_args.args[0].name() == "MainMenu"
+
+    read_values.handle_key("B")
+    assert read_values.substate == 1
+
+    read_values.substate = 2
+    read_values.loop()
+    assert (
+        read_values.photometer.lcd.message
+        == "C1: " + read_values.photometer.c1 + "\nC2: " + read_values.photometer.c2
+    )
+
+    read_values.handle_key("D")
     set_next_state_mock.assert_called_with(ANY)
     assert set_next_state_mock.call_args.args[0].name() == "MainMenu"

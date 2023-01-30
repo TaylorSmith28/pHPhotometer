@@ -50,7 +50,7 @@ def test_loop():
     salinity = Salinity(Photometer(), Settings(Photometer()))
 
     salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
+    assert salinity.photometer.lcd.message == "Salinity\n" + salinity.string
 
 
 @mock.patch.object(Salinity, "_set_next_state")
@@ -69,25 +69,25 @@ def test_salinity(set_next_state_mock):
     salinity = Salinity(Photometer(), Settings(Photometer()))
 
     salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
+    assert salinity.photometer.lcd.message == "Salinity\n" + salinity.string
 
     salinity.handle_key("3")
     assert salinity.string == "3"
 
     salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
+    assert salinity.photometer.lcd.message == "Salinity\n" + salinity.string
 
     salinity.handle_key("*")
     assert salinity.string == "3."
 
     salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
+    assert salinity.photometer.lcd.message == "Salinity\n" + salinity.string
 
     salinity.handle_key("*")
     assert salinity.string == "3."
 
     salinity.loop()
-    assert salinity.photometer.lcd.message == "*=. B=BS C=Clr\n" + salinity.string
+    assert salinity.photometer.lcd.message == "Salinity\n" + salinity.string
 
     salinity.handle_key("1")
     assert salinity.string == "3.1"
